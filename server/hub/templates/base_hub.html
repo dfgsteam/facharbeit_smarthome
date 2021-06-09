@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}{% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0">
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} - H.U.B.</title>
+    <!-- Bootstrap & jQuery & FontAwesome -->
+    <link rel="stylesheet" href="{{ url_for('sh.static', filename='css/bootstrap.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/5c2d11fa1e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript & Font & Favicon & Manifest -->
+    <script src="{{ url_for('sh.static', filename='js/main.js') }}"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="icon" type="image/png" href="{{ url_for('sh.static', filename='img/icon_purple128.png') }}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+      .body {
+        font-family: 'Heebo', sans-serif !important;
+      }
+      .zoom {
+        transition: transform .2s;
+      }
+      .zoom:hover {
+        transform: scale(1.0);
+      }
+    </style>
+</head>
+<body style="{% block body %}{% endblock %}">
+{% block content %}{% endblock %}
+<script type="text/javascript" src="{{ url_for('hub.static', filename='js/bootstrap.bundle.js') }}"></script>
+</body>
+</html>
