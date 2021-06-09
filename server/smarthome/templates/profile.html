@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}background-color: #121212;{% endblock %}
+{% block content %}
+{% include "navbars/nav_default.html" %}
+<h1 style="color: {{ t.text }};">{{ profile }}</h1>
+{% endblock %}

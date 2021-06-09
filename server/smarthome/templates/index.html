@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}background-color: {{ t.bg_body }};{% endblock %}
+{% block content %}
+{% include "navbars/nav_default.html" %}
+<br>
+<div class="container" id="allrooms">
+    <div class="row">
+        {% for room in rooms %}
+        <div class="col text-center zoom" style="background-color: {{ t.bg_layer_1 }}; border-radius: 15px;
+        margin: 10px; padding-top: 20px; padding-bottom: 25px;">
+            <a href="/smarthome/room/{{ room }}" style="color: {{ t.text }}; font-size: 1.6em; text-decoration: none;">{{ room }}</a>
+            <div class="container">
+                {% for device in data if device[1] in room %}
+                    {% if "Lampe" in device[3] %}
+                    <div class="row">
+
+                            {% for status in status_devices %}
+                                {% if status[0] in device[0] %}
+                                    {% if status[2] in "0" %}
+                                        <div class="col" style="color: {{ t.text }}; background-color: {{ t.bg_layer_2 }};
+                                        border-radius: 15px; margin-top: 20px; padding-bottom: 20px;"
+                                        onclick="location.href='/smarthome/api/{{ device[0] }}/on';">
+                                        <br>
+                                            <h1><i style="-webkit-text-stroke: 1px {{ t.bg_layer_2 }};" class="far fa-lightbulb"></i></h1>
+                                            <span>{{ device[2] }}</span>
+                                            <br>
+                                        </div>
+                                    {% endif %}
+                                    {% if status[2] in "1" %}
+                                        <div class="col" style="color: {{ t.text }}; background-color: {{ t.bg_layer_2 }};
+                                        border-radius: 15px; margin-top: 20px; padding-bottom: 20px;"
+                                        onclick="location.href='/smarthome/api/{{ device[0] }}/off';">
+                                        <br>
+                                            <h1><i class="fas fa-lightbulb"></i></h1>
+                                             <span>{{ device[2] }}</span>
+                                            <br>
+                                        </div>
+                                    {% endif %}
+                                    {% if status[2] in "3" %}
+                                        <div class="col" style="color: red; background-color: {{ t.bg_layer_2 }};
+                                        border-radius: 15px; margin-top: 20px; padding-bottom: 20px;">
+                                        <br>
+                                            <h1><i style="-webkit-text-stroke: 1px {{ t.bg_layer_2 }};" class="far fa-lightbulb"></i></h1>
+                                            <span>{{ device[2] }}</span>
+                                            <br>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+
+
+                    </div>
+                    {% endif %}
+                    {% if "PC" in device[3] %}
+                    <div class="row">
+                        <div class="col" style="color: {{ t.text }}; background-color: {{ t.bg_layer_2 }};
+                        border-radius: 15px; margin-top: 20px; padding-bottom: 20px;">
+                            <br>
+                            <h1><i class="fas fa-server"></i></h1>
+                            <span>{{ device[2] }}</span>
+                            <br>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if "Temp-Sensor" in device[3] %}
+                    {% for status in status_devices %}
+                    {% if status[0] in device[0] %}
+                    <div class="row">
+                        <div class="col" style="color: {{ t.text }}; background-color: {{ t.bg_layer_2 }};
+                        border-radius: 15px; margin-top: 20px; padding-bottom: 20px;">
+                            <br>
+                            <h1>{{ status[2] }}°</h1>
+                            <span>{{ device[2] }}</span>
+                            <br>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    {% if "Steckdose" in device[3] %}
+                    <div class="row">
+                        <div class="col" style="color: {{ t.text }}; background-color: {{ t.bg_layer_2 }};
+                         border-radius: 15px; margin-top: 20px; padding-bottom: 20px;">
+                            <br>
+                            <h1><i class="fas fa-plug"></i></h1>
+                            <span>{{ device[2] }}</span>
+                            <br>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                {% if username != None %}
+                <div class="row">
+                        <div onclick="location.href='/smarthome/admin/devices';" class="col" style="color: {{ t.text }};
+                         background-color: {{ t.bg_layer_2 }}; border-radius: 15px; margin-top: 20px; padding-bottom: 20px;">
+                            <br>
+                            <h1><i class="fas fa-plus"></i></h1>
+                            <span>{{ l.15 }}</span>
+                            <br>
+                        </div>
+                    </div>
+                {% endif %}
+                    
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<div class="container" id="favorites">
+    <h1 style="color: {{ t.text }}">Favoriten</h1>
+    <div class="row">
+        {% if favorites != "" %}
+        {% for fav in favorites %}
+        {% for device in data %}
+        {% if device[0] == fav %}
+        {% for status in status_devices %}
+        {% if status[0] in device[0] %}
+        <div class="col text-center">
+            <div style="background-color: {{ t.bg_layer_1 }}; border-radius: 15px;">
+                <br>
+                <h3 style="color: {{ t.text }}">{{ device[2] }}</h3>
+                <h4 style="color: {{ t.text }}">{{ device[1] }}</h4>
+                <br>
+                {% if device[3] == "Lampe" %}
+                {% if status[2] in "0" %}
+                    <div class="col" style="color: {{ t.text }}; margin-top: 20px;
+                         padding-bottom: 20px;"
+                         onclick="location.href='/smarthome/api/{{ device[0] }}/on';">
+                    <br>
+                        <h1><i style="-webkit-text-stroke: 1px {{ t.bg_layer_1 }};" class="far fa-lightbulb"></i></h1>
+                        <span>{{ device[2] }}</span>
+                        <br>
+                    </div>
+                {% endif %}
+                {% if status[2] in "1" %}
+                    <div class="col" style="color: {{ t.text }}; margin-top: 20px;
+                    padding-bottom: 20px;"
+                    onclick="location.href='/smarthome/api/{{ device[0] }}/off';">
+                    <br>
+                        <h1><i class="fas fa-lightbulb"></i></h1>
+                         <span>{{ device[2] }}</span>
+                        <br>
+                    </div>
+                {% endif %}
+                {% if status[2] == "e3" or status[2] == "e2" or status[2] == "e1" %}
+                    <div class="col" style="color: red; background-color: {{ t.bg_layer_2 }};
+                    border-radius: 15px; margin-top: 20px; padding-bottom: 20px;">
+                    <br>
+                        <h1><i style="-webkit-text-stroke: 1px {{ t.bg_layer_2 }};" class="far fa-lightbulb"></i></h1>
+                        <span>{{ device[2] }}</span>
+                        <br>
+                    </div>
+                {% endif %}
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        {% endif %}
+        {% if favorites == "" %}
+        <span style="color: {{ t.text }}">Please login to view your favorites!</span>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    $( document ).ready(function() {
+      $("#allrooms").hide();
+    });
+    $("#nav_allrooms").click(function () {
+    $("#allrooms").toggle();
+    $("#favorites").toggle();
+    });
+
+</script>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}background-color: {{ t.bg_body }};{% endblock %}
+{% block content %}
+{% include "navbars/nav_default.html" %}
+<br>
+<div class="container">
+    <div class="row">
+        {% for room in rooms %}
+        <div class="col-6 text-center" style="background-color: {{ t.bg_layer_1 }}; border-radius: 15px;
+        margin: 10px; padding-top: 20px; padding-bottom: 25px;">
+            <a href="/room/{{ room }}" style="color: {{ t.text }}; font-size: 1.6em; text-decoration: none;">{{ room }}</a>
+            <div class="container">
+                {% for device in data if device[1] in room %}
+                    {% if "Lampe" in device[3] %}
+                    <div class="row">
+                            {% for status in status_devices %}
+                                {% if status[0] in device[0] %}
+                                    {% if status[2] in "0" %}
+                                        <div class="col" style="color: {{ t.text }}; background-color: {{ t.bg_layer_2 }};
+                                        border-radius: 15px; margin-top: 20px; padding-bottom: 20px;"
+                                        onclick="location.href='/api/{{ device[0] }}/on';">
+                                        <br>
+                                            <h1><i style="-webkit-text-stroke: 1px {{ t.bg_layer_2 }};" class="far fa-lightbulb"></i></h1>
+                                            <span>{{ device[2] }}</span>
+                                            <br>
+                                        </div>
+                                    {% endif %}
+                                    {% if status[2] in "1" %}
+                                        <div class="col" style="color: {{ t.text }}; background-color: {{ t.bg_layer_2 }};
+                                        border-radius: 15px; margin-top: 20px; padding-bottom: 20px;"
+                                        onclick="location.href='/api/{{ device[0] }}/off';">
+                                        <br>
+                                            <h1><i class="fas fa-lightbulb"></i></h1>
+                                             <span>{{ device[2] }}</span>
+                                            <br>
+                                        </div>
+                                    {% endif %}
+                                    {% if status[2] in "3" %}
+                                        <div class="col" style="color: red; background-color: {{ t.bg_layer_2 }};
+                                        border-radius: 15px; margin-top: 20px; padding-bottom: 20px;">
+                                        <br>
+                                            <h1><i style="-webkit-text-stroke: 1px {{ t.bg_layer_2 }};" class="far fa-lightbulb"></i></h1>
+                                            <span>{{ device[2] }}</span>
+                                            <br>
+                                        </div>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+
+
+                    </div>
+                    {% endif %}
+                    {% if "PC" in device[3] %}
+                    <div class="row">
+                        <div class="col" style="color: {{ t.text }}; background-color: {{ t.bg_layer_2 }};
+                        border-radius: 15px; margin-top: 20px; padding-bottom: 20px;">
+                            <br>
+                            <h1><i class="fas fa-server"></i></h1>
+                            <span>{{ device[2] }}</span>
+                            <br>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if "Temp-Sensor" in device[3] %}
+                    {% for status in status_devices %}
+                    {% if status[0] in device[0] %}
+                    <div class="row">
+                        <div class="col" style="color: {{ t.text }}; background-color: {{ t.bg_layer_2 }};
+                        border-radius: 15px; margin-top: 20px; padding-bottom: 20px;">
+                            <br>
+                            <h1>{{ status[2] }}°</h1>
+                            <span>{{ device[2] }}</span>
+                            <br>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    {% if "Steckdose" in device[3] %}
+                    <div class="row">
+                        <div class="col" style="color: {{ t.text }}; background-color: {{ t.bg_layer_2 }};
+                         border-radius: 15px; margin-top: 20px; padding-bottom: 20px;">
+                            <br>
+                            <h1><i class="fas fa-plug"></i></h1>
+                            <span>{{ device[2] }}</span>
+                            <br>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+                    <div class="row">
+                        <div onclick="location.href='/admin/devices';" class="col" style="color: {{ t.text }};
+                         background-color: {{ t.bg_layer_2 }}; border-radius: 15px; margin-top: 20px; padding-bottom: 20px;">
+                            <br>
+                            <h1><i class="fas fa-plus"></i></h1>
+                            <span>{{ l.15 }}</span>
+                            <br>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

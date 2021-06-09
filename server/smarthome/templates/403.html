@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0">
+    <meta charset="UTF-8">
+    <title>403 - Hier darfst du nicht hin</title>
+    <!-- Bootstrap & jQuery & FontAwesome -->
+    <link rel="stylesheet" href="{{ url_for('sh.static', filename='css/bootstrap.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/5c2d11fa1e.js" crossorigin="anonymous"></script>
+    <!-- JavaScript & Font & Favicon & Manifest -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="icon" type="image/png" href="{{ url_for('sh.static', filename='img/icon_purple128.png') }}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- iOS -->
+    <link rel="apple-touch-icon"                       href="{{ url_for('sh.static', filename='img/appicon512.png') }}">
+    <meta name="apple-mobile-web-app-capable"          content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection"                      content="telephone=no">
+    <style>
+      .body {
+        font-family: 'Heebo', sans-serif !important;
+      }
+    </style>
+</head>
+<body style="{% block body %}{% endblock %}; height: 100vh;">
+<div class="container">
+    <div class="row align-items-center justify-content-center" style="height: 90vh;">
+        <div class="col-6 text-center" style="background-color: #7371FC;">
+            <br>
+            <h1 style="color: #fff;">403 - Forbidden</h1>
+            <br>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="{{ url_for('sh.static', filename='js/bootstrap.bundle.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}{{ l.2 }}{% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}background-color: {{ t.bg_body }};{% endblock %}
+{% block content %}
+{% include "navbars/nav_admin.html" %}
+<br>
+<div class="container">
+    <h1 style="color: {{ t.text }};">{{ l.5 }}</h1>
+    <span style="color: {{ t.text }};"><a style="color: {{ t.text }};" href="/smarthome/admin">{{ l.7 }}</a>&nbsp;/&nbsp;{{ l.5 }}</span>
+    <div class="row" style="padding-top: 2vh;">
+        <div class="col raum">
+            <div class="container">
+                <div class="row">
+                    <h2>{{ l.5 }}</h2>
+                    <br>
+                    <div class="col-7">
+                        <ul class="list-group" style="padding-top: 2vh; padding-bottom: 2vh; border-radius: 15px;">
+                            <li class="list-group-item" style="background-color: {{ t.bg_layer_2 }}; color: {{ t.text }}; font-size: 1.4em; font-weight: 700;">
+                                {{ l.5 }} ({{ l.6 }})
+                            </li>
+                            {% for room in rooms %}
+                                <li style="background-color: {{ t.bg_layer_2 }}; color: {{ t.text }}; font-size: 1.2em" class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            {{ room }} ()
+                                        </div>
+                                        <div class="col-4 text-end">
+                                            <a href="/smarthome/admin/rooms/delete/{{ room }}" style="color: {{ t.text }};">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            <li class="list-group-item" style="background-color: {{ t.bg_layer_2 }};">
+                                &nbsp;
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-5">
+                        <br>
+                        <h2>{{ l.13 }}</h2>
+                        <form action="/smarthome/admin/rooms/add" method="post">
+                            <label style="color: {{ t.text }};" for="newroom" class="form-label">{{ l.14 }}</label>
+                            <input type="text" class="form-control" id="newroom" name="newroom" aria-describedby="newroom">
+                            <br>
+                            <button type="submit" class="btn btn-primary">{{ l.15 }}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

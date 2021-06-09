@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}{{ l.2 }}{% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}background-color: {{ t.bg_body }};{% endblock %}
+{% block content %}
+{% include "navbars/nav_admin.html" %}
+<br>
+<div class="container">
+    <h1 style="color: {{ t.text }};">{{ username }} - {{ l.7 }}</h1>
+    <br>
+    <div class="row">
+        <div class="col raum">
+            <div class="container">
+                <div class="row">
+                    <h3 style="padding-bottom: 1vh;">{{ l.17 }}</h3>
+                    <br>
+                    <div class="col text-center kachel" onclick="location.href='/smarthome/admin/rooms';">
+                        <h1><i style="color: {{ t.text }};" class="fas fa-door-open"></i></h1>
+                        <span>{{ l.5 }}</span>
+                    </div>
+                    <div class="col text-center kachel" onclick="location.href='/smarthome/admin/devices';">
+                        <h1><i style="color: {{ t.text }};" class="fas fa-lightbulb"></i></h1>
+                        <span>{{ l.6 }}</span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 2vh;">
+                    <br>
+                    <div class="col text-center kachel" onclick="location.href='/smarthome/admin/speechrecognition';">
+                        <h1><i style="color: {{ t.text }};" class="fas fa-microphone"></i></h1>
+                        <span>{{ l.35 }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col raum">
+            <div class="container">
+                <div class="row">
+                    <h3 style="padding-bottom: 1vh;">{{ l.18 }}</h3>
+                    <br>
+                    <div class="col text-center kachel" onclick="location.href='/smarthome/admin/users';">
+                        <h1><i style="color: {{ t.text }};" class="fas fa-users"></i></h1>
+                        <span>{{ l.12 }}</span>
+                    </div>
+                    <div class="col text-center kachel" onclick="location.href='/smarthome/admin/users/usersettings';">
+                        <h1><i style="color: {{ t.text }};" class="fas fa-cog"></i></h1>
+                        <span>{{ l.19 }}</span>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 2vh;">
+                    <br>
+                    <div class="col text-center kachel" onclick="location.href='/smarthome/admin/users/favorites';">
+                        <h1><i style="color: {{ t.text }};" class="fas fa-star"></i></h1>
+                        <span>{{ l.37 }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

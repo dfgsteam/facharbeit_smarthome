@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}background-color: {{ t.bg_body }}{% endblock %}
+{% block content %}
+{% include "navbars/nav_room.html" %}
+<br>
+
+<div class="container">
+<div class="row">
+    <div class="col text-center zoom" style="background-color: {{ t.bg_layer_1 }}; border-radius: 15px; margin: 10px; padding-top: 20px; padding-bottom: 25px;">
+        <a href="/smarthome/room/{{ room }}" style="color: {{ t.text }}; font-size: 1.6em; text-decoration: none;">{{ room }}</a>
+        <div class="container" style="margin-top: 2vh; margin-bottom: 4vh;">
+            <div class="row">
+            {% for device in data if device[1] in room %}
+            {% if "Lampe" in device[3] %}
+                <div class="col-4">
+                    <div class="container">
+                        <div class="card" style="border: 0px; min-height: 35vh; background-color: {{ t.bg_layer_1 }};">
+                            <div class="card-header" style="background-color: {{ t.bg_layer_2 }}; border: 0px; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                                <span style="color: {{ t.text }}; font-weight: 600; font-size: 1.4em">{{ device[2] }}</span>
+                            </div>
+                            <div class="card-body"  style="background-color: {{ t.bg_layer_2 }}; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+                                {% for status in status_devices %}
+                                {% if status[0] in device[0] %}
+                                {% if status[2] in "0" %}
+                                <h1><i style="-webkit-text-stroke: 1px {{ t.bg_layer_2 }};" class="far fa-lightbulb"></i></h1>
+                                <p class="card-text">{{ l.27 }}: </p>
+                                <a href="/smarthome/api/{{ device[0] }}/on" type="button" class="btn btn-primary" style="background-color: {{ t.accent }}; border: 0px;">Toggle</a>
+                                {% endif %}
+                                {% if status[2] in "1" %}
+                                <h1><i style="-webkit-text-stroke: 1px {{ t.bg_layer_2 }};" class="fas fa-lightbulb"></i></h1>
+                                <p class="card-text">{{ l.27 }}: </p>
+                                <a href="/smarthome/api/{{ device[0] }}/off" type="button" class="btn btn-primary" style="background-color: {{ t.accent }}; border: 0px;">Toggle</a>
+                                {% endif %}
+                                {% if status[2] in "3" %}
+                                <h1 style="color: red;"><i style="-webkit-text-stroke: 1px {{ t.bg_layer_2 }};" class="fas fa-lightbulb"></i></h1>
+                                <p class="card-text">{{ l.27 }}: </p>
+                                {% endif %}
+                                {% endif %}
+                                {% endfor %}
+
+                                <div style="padding-top: 2vh; padding-bottom: 2vh;">
+                                    <form id="form_brightness" action="/smarthome/api/{{ device[0]}}/brightness" method="post">
+                                        <label for="brightness" class="form-label">{{ l.28 }}</label>
+                                        <input type="range" class="form-range" min="0" max="1" step="0.1" value="0" id="brightness" name="brightness">
+                                    </form>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="/smarthome/api/{{ device[0] }}/coldwhite" type="button" class="btn btn-primary" style="background-color: #fff; border: 0px;">
+                                            &nbsp;&nbsp;
+                                        </a>
+                                        <a href="/smarthome/api/{{ device[0] }}/warmwhite" type="button" class="btn btn-warning" style="background-color: #FDF4DC; border: 0px;">
+                                            &nbsp;&nbsp;
+                                        </a>
+                                        <a href="/smarthome/api/{{ device[0] }}/red" type="button" class="btn btn-primary" style="background-color: red; border: 0px;">
+                                            &nbsp;&nbsp;
+                                        </a>
+                                        <a href="/smarthome/api/{{ device[0] }}/green" type="button" class="btn btn-primary" style="background-color: green; border: 0px;">
+                                            &nbsp;&nbsp;
+                                        </a>
+                                        <a href="/smarthome/api/{{ device[0] }}/blue" type="button" class="btn btn-primary" style="background-color: blue; border: 0px;">
+                                            &nbsp;&nbsp;
+                                        </a>
+                                    </div>
+                                    <br>
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a href="/smarthome/api/{{ device[0] }}/yellow" type="button" class="btn btn-primary" style="background-color: yellow; border: 0px;">
+                                            &nbsp;&nbsp;
+                                        </a>
+                                        <a href="/smarthome/api/{{ device[0] }}/orange" type="button" class="btn btn-warning" style="background-color: orange; border: 0px;">
+                                            &nbsp;&nbsp;
+                                        </a>
+                                        <a href="/smarthome/api/{{ device[0] }}/turquoise" type="button" class="btn btn-primary" style="background-color: turquoise; border: 0px;">
+                                            &nbsp;&nbsp;
+                                        </a>
+                                        <a href="/smarthome/api/{{ device[0] }}/pink" type="button" class="btn btn-primary" style="background-color: pink; border: 0px;">
+                                            &nbsp;&nbsp;
+                                        </a>
+                                        <a href="/smarthome/api/{{ device[0] }}/purple" type="button" class="btn btn-primary" style="background-color: purple; border: 0px;">
+                                            &nbsp;&nbsp;
+                                        </a>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if "PC" in device[3] %}
+                <div class="col-4">
+                    <div class="container">
+                        <div class="card"  style="border: 0px; height: 35vh; background-color: {{ t.bg_layer_1 }};">
+                            <div class="card-header" style="background-color: {{ t.bg_layer_2 }}; border: 0px; border-bottom: 5px solid {{ t.accent }}; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                                <span style="color: {{ t.text }}; font-weight: 700; font-size: 1.3em">{{ device[2] }}</span>
+                            </div>
+                            <div class="card-body"  style="background-color: {{ t.bg_layer_2 }}; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+                                <h1 style="color: {{ t.text }};"><i id="b{{ device[0] }}" class="fas fa-plug"></i></h1>
+                                <p class="card-text" style="color: {{ t.text }};">{{ l.27 }}: </p>
+                                <button class="btn btn-primary" style="background-color: {{ t.accent }}; border: 0px;">On</button>
+                                <button class="btn btn-primary" style="background-color: {{ t.accent }}; border: 0px;">Off</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if "Temp-Sensor" in device[3] %}
+                <div class="col-4" style="color: {{ t.text }}; background-color: {{ t.bg_layer_2 }}; border-radius: 15px; margin-top: 20px; padding-bottom: 20px;">
+                    <br>
+                    <h1><i class="fas fa-temperature-low"></i></h1>
+                    <span>{{ device[2] }}</span>
+                    <br>
+                </div>
+            {% endif %}
+            {% if "Steckdose" in device[3] %}
+                <div class="col-4">
+                    <div class="container">
+                        <div class="card" style="border: 0px; height: 35vh; background-color: {{ t.bg_layer_1 }};">
+                            <div class="card-header" style="background-color: {{ t.bg_layer_2 }}; border: 0px; border-bottom: 5px solid {{ t.accent }}; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                                <span style="color: {{ t.text }}; font-weight: 700; font-size: 1.2em">{{ device[2] }}</span>
+                            </div>
+                            <div class="card-body"  style="background-color: {{ t.bg_layer_2 }}; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+                                <h1 style="color: {{ t.text }};"><i id="c{{ device[0] }}" class="fas fa-plug"></i></h1>
+                                <p class="card-text">{{ l.27 }}: </p>
+                                <button class="btn btn-primary" style="background-color: {{ t.accent }}; border: 0px;">On</button>
+                                <button class="btn btn-primary" style="background-color: {{ t.accent }}; border: 0px;">Off</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+    $( "#brightness" ).mouseup(function() {
+        $( "#form_brightness" ).submit();
+    });
+</script>
+
+
+{% endblock %}

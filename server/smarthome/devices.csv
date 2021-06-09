@@ -1,0 +1,8 @@
+ID;Zimmer;Name;Typ;IP;TYP-ID
+1001;Schlafzimmer;Kronleuchter;Lampe;192.168.178.21;1
+1101;Wohnzimmer;Stehlampe;Lampe;192.168.178.21;1
+1102;Wohnzimmer;Fernseher;Steckdose;192.168.178.21;2
+1201;Badezimmer;LED-Streifen;Lampe;192.168.178.21;1
+1301;Arbeitszimmer;Film-Server;PC;192.168.178.21;3
+1401;Küche;Temperatur;Temp-Sensor;192.168.178.21;4
+1402;Küche;Deckenleuchte;Lampe;192.168.178.21;1

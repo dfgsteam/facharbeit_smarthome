@@ -1,0 +1,659 @@
+{% extends "base.html" %}
+{% block title %}TouchUI{% endblock %}
+{% block body %}background-color: {{ t.bg_body }};{% endblock %}
+{% block content %}
+<!-- Navigationsleiste oben -->
+<div class="fixed-top" style="background-color: {{ t.dark_accent }}; padding-top: 2vh; padding-bottom: 2vh;"
+     onload="startTime()">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-6 text-start" style="display:inline;">
+                <img src="{{ url_for('sh.static', filename='img/logo_white_trans.png') }}" height="80px">
+            </div>
+            <div class="col-6 text-end">
+                <h1 style="color: #fff;"><i class="fas fa-user"></i></h1>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 2vh;">
+            <div class="col-1 text-start">
+                <span id="nav_home" style="color: #fff; font-size: 1.6em; font-weight: 700;">{{ l.1 }}</span>
+            </div>
+            {% for room in roomlist %}
+            <div class="col text-center">
+                <span id="nav_{{ room[1]|wordwrap -}}" style="color: #fff; font-size: 1.6em; font-weight: 400;">{{ room[1] }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div id="puffer" style="height: 19vh;">
+</div>
+
+<!-- Die Hauptseiten erreichbar über die untere Navigation -->
+<div id="c_home" style="background-color: {{ t.bg_layer_1 }}; padding-top:4vh; height: 80vh;">
+    <div class="container">
+        <div class="row" style="padding-bottom: 5vh;">
+            <div class="col text-center">
+                <div style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                    <h3 style="color: {{ t.light_accent }};">Testkachel</h3>
+                </div>
+            </div>
+            <div class="col text-center">
+                <div style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                    <h3 style="color: {{ t.light_accent }};" id="Uhrzeit" onload="showTime()"></h3>
+                </div>
+            </div>
+            <div class="col text-center">
+                <div style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                    <h3 style="color: {{ t.light_accent }};">Testkachel</h3>
+                </div>
+            </div>
+            <div class="col text-center">
+                <div style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                    <h3 style="color: {{ t.light_accent }};">Testkachel</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 5vh;">
+            <div class="col text-center">
+                <div style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                    <h3 style="color: {{ t.light_accent }};">Testkachel</h3>
+                </div>
+            </div>
+            <div class="col text-center">
+                <div style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                    <h3 style="color: {{ t.light_accent }};">Testkachel</h3>
+                </div>
+            </div>
+            <div class="col text-center">
+                <div style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                    <h3 style="color: {{ t.light_accent }};">Testkachel</h3>
+                </div>
+            </div>
+            <div class="col text-center">
+                <div style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                    <h3 style="color: {{ t.light_accent }};">Testkachel</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="c_rooms" style="background-color: {{ t.bg_layer_1 }}; padding-top:4vh; height: 80vh;">
+    <div class="container">
+        <div class="row" style="padding-bottom: 5vh;">
+            {% for room in roomlist %}
+            <div class="col text-center">
+                <div id="nav_room_{{ room[1]|wordwrap -}}" style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                    <h3 style="color: {{ t.light_accent }};">{{ room[1] }}</h3>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div id="c_devices" style="background-color: {{ t.bg_layer_1 }}; padding-top:4vh; height: 80vh;">
+
+</div>
+
+<div id="c_settings" style="background-color: {{ t.bg_layer_1 }}; padding-top:4vh; height: 80vh;">
+    <div class="container">
+        <div class="row" style="padding-bottom: 5vh;">
+            <div class="col text-center">
+                <div id="nav_settings_account" style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                    <h1 style="color: {{ t.light_accent }};"><i class="fas fa-user"></i></h1>
+                    <span style="color: {{ t.light_accent }}; font-size: 1.4em">{{ l.40 }}</span>
+                </div>
+            </div>
+            <div class="col text-center">
+                <div id="nav_settings_rooms" style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                    <h1 style="color: {{ t.light_accent }};"><i class="fas fa-door-open"></i></h1>
+                    <span style="color: {{ t.light_accent }}; font-size: 1.4em">{{ l.5 }}</span>
+                </div>
+            </div>
+            <div class="col text-center">
+                <div id="nav_settings_devices" style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                    <h1 style="color: {{ t.light_accent }};"><i class="fas fa-lightbulb"></i></h1>
+                    <span style="color: {{ t.light_accent }}; font-size: 1.4em">{{ l.6 }}</span>
+                </div>
+            </div>
+            <div class="col text-center">
+                <div id="nav_settings_admin" style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                    <h1 style="color: {{ t.light_accent }};"><i class="fas fa-tools"></i></h1>
+                    <span style="color: {{ t.light_accent }}; font-size: 1.4em">{{ l.7 }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-bottom: 5vh;">
+            <div class="col text-center">
+                <div id="nav_settings_homescreen" style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                    <h1 style="color: {{ t.light_accent }};"><i class="fas fa-home"></i></h1>
+                    <span style="color: {{ t.light_accent }}; font-size: 1.4em">{{ l.44 }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Die Seiten für einzelne Räume -->
+{% for room in roomlist %}
+<div id="c_room_{{ room[1]|wordwrap -}}" style="background-color: {{ t.bg_layer_1 }}; height: 78vh;">
+    <div style="height: 11vh; background-color: {{ t.accent }};">
+        <div class="container">
+            <div class="row justify-content-start">
+                {% for device in data if device[1] in room[1] %}
+                <div class="col-2 text-center" style="padding-top:2vh;">
+                    {% if device[3] in "Lampe" %}
+                    <h2 style="color: {{ t.white }}"><i class="fas fa-lightbulb"></i></h2>
+                    {% endif %}
+                    {% if device[3] in "Temp-Sensor" %}
+                    <h2 style="color: {{ t.white }}"><i class="fas fa-temperature-low"></i></h2>
+                    {% endif %}
+                    {% if device[3] in "Steckdose" %}
+                    <h2 style="color: {{ t.white }}"><i class="fas fa-plug"></i></h2>
+                    {% endif %}
+                    {% if device[3] in "PC" %}
+                    <h2 style="color: {{ t.white }}"><i class="fas fa-server"></i></h2>
+                    {% endif %}
+                    <span style="color: {{ t.white }}">{{ device[2] }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6" style="padding-top: 4vh;">
+            {% for device in data if device[1] in room[1]  %}
+                {% if device[3] in "Lampe" %}
+                <div class="container" id="singleroom_{{ room[1] }}_{{ device[0] }}">
+                    <h1 style="color: {{ t.light_accent }};">{{ device[2] }}</h1>
+                    <h4 style="color: {{ t.light_accent }};">{{ room[1] }}</h4>
+                    {% for status in status_devices %}
+                    {% if status[0] in device[0] %}
+                    {% if status[3] is defined %}
+                    {% set dim = status[3]|float  %}
+                    <span style="font-size: 8em; color: {{ t.light_accent }};">{{ dim*100 }}%</span>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+        {% endfor %}
+        </div>
+        <div class="col-6" style="padding-top:4vh;">
+            <div class="container text-center">
+                <div style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                    box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                        <h1 style="color: {{ t.light_accent }};"><i class="fas fa-lightbulb"></i></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<!-- Einstellungsseiten -->
+<div id="sett_account" style="background-color: {{ t.bg_layer_1 }}; padding-top:4vh; height: 80vh;">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <span id="sett_account_back" style="color: {{ t.light_accent }}; font-size: 2em; font-weight: 700;">
+                    <i class="fas fa-arrow-left"></i>&nbsp;{{ l.20 }}&nbsp;/&nbsp;
+                    <span style="font-weight: 500;">{{ l.40 }}</span>
+                </span>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 4vh;">
+            <form action="/smarthome/admin/users/usersettings/appearance" method="post">
+                <div class="row g-3">
+                    <div class="col">
+                        <span style="font-size: 1.4em; color: {{ t.light_accent }};">{{ l.22 }}&nbsp;<i class="fas fa-palette"></i></span>
+                        <br>
+                        <select class="form-select" name="appearance" style="background-color: {{ t.dark_accent }}; border: 0px; color: {{ t.light_accent }};">
+                            <option selected value="lightmode">{{ l.41 }}</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <span style="font-size: 1.4em; color: {{ t.light_accent }};">{{ l.23 }}&nbsp;<i class="fas fa-language"></i></span>
+                        <br>
+                        <select class="form-select" name="language" style="background-color: {{ t.dark_accent }}; border: 0px; color: {{ t.light_accent }};">
+                            <option selected value="de">{{ l.42 }}</option>
+                            <option value="en">{{ l.43 }}</option>
+                        </select>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-primary">{{ l.24 }}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="sett_rooms" style="background-color: {{ t.bg_layer_1 }}; padding-top:4vh; height: 80vh;">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <span id="sett_rooms_back" style="color: {{ t.light_accent }}; font-size: 2em; font-weight: 700;">
+                    <i class="fas fa-arrow-left"></i>&nbsp;{{ l.20 }}&nbsp;/&nbsp;
+                    <span style="font-weight: 500;">{{ l.5 }}</span>
+                </span>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 4vh;">
+            {% for room in roomlist %}
+            <div class="col text-center">
+                <div id="sett_room_{{ room[1]|wordwrap -}}" style="background-color: {{ t.white }}; border-radius: 10px; padding-top: 5vh; padding-bottom: 5vh;
+                box-shadow: 5px 5px 10px 5px rgba(160,160,160,0.3);">
+                    <span style="font-size: 2.8em; color: {{ t.light_accent }};"><i class="{{ room[3] }}"></i></span>
+                    <h3 style="color: {{ t.light_accent }};">{{ room[1] }}</h3>
+                    <br>
+                    <h3><i style="color: red;" class="fas fa-trash"></i>&nbsp;<i style="color: {{ t.dark_accent }};" class="fas fa-pencil-alt"></i></h3>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div id="sett_devices" style="background-color: {{ t.bg_layer_1 }}; padding-top:4vh; height: 80vh;">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <span id="sett_devices_back" style="color: {{ t.light_accent }}; font-size: 2em; font-weight: 700;">
+                    <i class="fas fa-arrow-left"></i>&nbsp;{{ l.20 }}&nbsp;/&nbsp;
+                    <span style="font-weight: 500;">{{ l.6 }}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="sett_admin" style="background-color: {{ t.bg_layer_1 }}; padding-top:4vh; height: 80vh;">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <span id="sett_admin_back" style="color: {{ t.light_accent }}; font-size: 2em; font-weight: 700;">
+                    <i class="fas fa-arrow-left"></i>&nbsp;{{ l.20 }}&nbsp;/&nbsp;
+                    <span style="font-weight: 500;">{{ l.7 }}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="sett_homescreen" style="background-color: {{ t.bg_layer_1 }}; padding-top:4vh; height: 80vh;">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <span id="sett_homescreen_back" style="color: {{ t.light_accent }}; font-size: 2em; font-weight: 700;">
+                    <i class="fas fa-arrow-left"></i>&nbsp;{{ l.20 }}&nbsp;/&nbsp;
+                    <span style="font-weight: 500;">{{ l.44 }}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Navigationsleiste Unten -->
+<div class="fixed-bottom" style="background-color: {{ t.dark_accent }};">
+    <div class="row" style="padding-top: 2vh; padding-bottom: 2vh;">
+        <div class="col-3 text-center" id="bnav_home">
+            <h1 style="color: {{ t.white }}"><i class="fas fa-home"></i></h1>
+            <span style="color: {{ t.white }}">{{ l.1 }}</span>
+        </div>
+        <div class="col-3 text-center" id="bnav_rooms">
+            <h1 style="color: {{ t.white }}"><i class="fas fa-door-open"></i></h1>
+            <span style="color: {{ t.white }}">{{ l.5 }}</span>
+        </div>
+        <div class="col-3 text-center" id="bnav_devices">
+            <h1 style="color: {{ t.white }}"><i class="fas fa-lightbulb"></i></h1>
+            <span style="color: {{ t.white }}">{{ l.6 }}</span>
+        </div>
+        <div class="col-3 text-center" id="bnav_settings">
+            <h1 style="color: {{ t.white }}"><i class="fas fa-cog"></i></h1>
+            <span style="color: {{ t.white }}">{{ l.20 }}</span>
+        </div>
+    </div>
+</div>
+<script>
+    // Beim Starten wird alles außer Home ausgeblendet
+    $( document ).ready(function() {
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").hide()
+        $("#sett_account").hide()
+        {% for room in roomlist %}
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        {% endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+
+    {% for room in roomlist -%}
+    $( "#nav_{{ room[1]|wordwrap -}}" ).click(function() {
+        $("#c_home").hide()
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").hide()
+        $("#c_room_{{ room[1]|wordwrap -}}").show()
+        {% for other_room in roomlist if other_room[1] != room[1] %}
+        $("#c_room_{{ other_room[1]|wordwrap -}}").hide()
+        {%- endfor %}
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "700")
+        {% for other_room in roomlist if other_room[1] != room[1] %}
+        $("#nav_{{ other_room[1]|wordwrap -}}").css("font-weight", "400")
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+    {% endfor %}
+
+    {% for room in roomlist -%}
+    $( "#nav_room_{{ room[1]|wordwrap -}}" ).click(function() {
+        $("#c_home").hide()
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").hide()
+        $("#c_room_{{ room[1]|wordwrap -}}").show()
+        {% for other_room in roomlist if other_room[1] != room[1] %}
+        $("#c_room_{{ other_room[1]|wordwrap -}}").hide()
+        {%- endfor %}
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "700")
+        {% for other_room in roomlist if other_room[1] != room[1] %}
+        $("#nav_{{ other_room[1]|wordwrap -}}").css("font-weight", "400")
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+    {% endfor %}
+
+    $( "#nav_settings_account" ).click(function() {
+        $("#c_home").hide()
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").hide()
+        {% for room in roomlist %}
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "400")
+        {%- endfor %}
+        $("#sett_account").show()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+
+    $( "#nav_settings_rooms" ).click(function() {
+        $("#c_home").hide()
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").hide()
+        {% for room in roomlist %}
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "400")
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").show()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+
+    $( "#nav_settings_devices" ).click(function() {
+        $("#c_home").hide()
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").hide()
+        {% for room in roomlist %}
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "400")
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").show()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+
+    $( "#nav_settings_admin" ).click(function() {
+        $("#c_home").hide()
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").hide()
+        {% for room in roomlist %}
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "400")
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").show()
+        $("#sett_homescreen").hide()
+    });
+
+    $( "#nav_settings_homescreen" ).click(function() {
+        $("#c_home").hide()
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").hide()
+        {% for room in roomlist %}
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "400")
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").show()
+    });
+
+    $( "#nav_home" ).click(function() {
+        $("#c_home").show()
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").hide()
+        {% for room in roomlist %}
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "400")
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+
+    $( "#bnav_home" ).click(function() {
+        $("#c_home").show()
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").hide()
+        {% for room in roomlist %}
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "400")
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+
+    $( "#bnav_rooms" ).click(function() {
+        $("#c_home").hide()
+        $("#c_rooms").show()
+        $("#c_devices").hide()
+        $("#c_settings").hide()
+        {% for room in roomlist %}
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "400")
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+
+    $( "#bnav_devices" ).click(function() {
+        $("#c_home").hide()
+        $("#c_rooms").hide()
+        $("#c_devices").show()
+        $("#c_settings").hide()
+        {% for room in roomlist %}
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "400")
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+
+    $( "#bnav_settings" ).click(function() {
+        $("#c_home").hide()
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").show()
+        {% for room in roomlist %}
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "400")
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+
+    $( "#sett_account_back" ).click(function() {
+        $("#c_home").hide()
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").show()
+        {% for room in roomlist %}
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "400")
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+
+    $( "#sett_rooms_back" ).click(function() {
+        $("#c_home").hide()
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").show()
+        {% for room in roomlist %}
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "400")
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+
+    $( "#sett_devices_back" ).click(function() {
+        $("#c_home").hide()
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").show()
+        {% for room in roomlist %}
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "400")
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+
+    $( "#sett_admin_back" ).click(function() {
+        $("#c_home").hide()
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").show()
+        {% for room in roomlist %}
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "400")
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+
+    $( "#sett_homescreen_back" ).click(function() {
+        $("#c_home").hide()
+        $("#c_rooms").hide()
+        $("#c_devices").hide()
+        $("#c_settings").show()
+        {% for room in roomlist %}
+        $("#nav_{{ room[1]|wordwrap -}}").css("font-weight", "400")
+        $("#c_room_{{ room[1]|wordwrap -}}").hide()
+        {%- endfor %}
+        $("#sett_account").hide()
+        $("#sett_rooms").hide()
+        $("#sett_devices").hide()
+        $("#sett_admin").hide()
+        $("#sett_homescreen").hide()
+    });
+</script>
+<script>
+function showTime(){
+    var date = new Date();
+    var h = date.getHours(); // 0 - 23
+    var m = date.getMinutes(); // 0 - 59
+    var s = date.getSeconds(); // 0 - 59
+    var session = "AM";
+
+
+
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+
+    var time = h + ":" + m + ":" + s + " ";
+    document.getElementById("Uhrzeit").innerText = time;
+    document.getElementById("Uhrzeit").textContent = time;
+
+    setTimeout(showTime, 1000);
+
+}
+
+showTime();
+</script>
+{% endblock %}

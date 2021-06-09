@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}{{ l.2 }}{% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}background-color: {{ t.bg_body }};{% endblock %}
+{% block content %}
+{% include "navbars/nav_admin.html" %}
+<br>
+<div class="container">
+    <h1 style="color: {{ t.text }};">{{ l.6 }}</h1>
+    <span style="color: {{ t.text }};"><a style="color: {{ t.text }};" href="/smarthome/admin">{{ l.7 }}</a>&nbsp;/&nbsp;{{ l.6 }}</span>
+    <div class="row" style="padding-top: 2vh;">
+        <div class="col raum">
+            <div class="container">
+                <div class="row">
+                    <h2>{{ l.6 }}</h2>
+                    <br>
+                    <div class="col-8">
+                        <ul class="list-group" style="padding-top: 2vh; padding-bottom: 2vh; border-radius: 15px;">
+                            <li class="list-group-item" style="background-color: {{ t.bg_layer_2 }}; color: {{ t.text }}; font-size: 1.4em; font-weight: 700;">
+                                {{ l.6 }}
+                            </li>
+                            {% for device in data %}
+                                <li style="background-color: {{ t.bg_layer_2 }}; color: {{ t.text }}; font-size: 1.2em" class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-1">
+                                            {{ device[0] }}
+                                        </div>
+                                        <div class="col">
+                                            {{ device[1] }}
+                                        </div>
+                                        <div class="col">
+                                            {{ device[2] }}
+                                        </div>
+                                        <div class="col">
+                                            {{ device[3] }}
+                                        </div>
+                                        <div class="col">
+                                            {{ device[4] }}
+                                        </div>
+
+                                    </div>
+                                </li>
+                            {% endfor %}
+                            <li class="list-group-item" style="background-color: {{ t.bg_layer_2 }};">
+                                &nbsp;
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-4">
+                        <br>
+                        <h2>{{ l.26 }}</h2>
+                        <form action="/smarthome/admin/devices/add" method="post">
+                            <label style="color: {{ t.text }};" for="nd_name" class="form-label">{{ l.33 }}</label>
+                            <input type="text" class="form-control" id="nd_name" name="nd_name" aria-describedby="nd_name">
+                            <br>
+                            <label style="color: {{ t.text }};" for="nd_ip" class="form-label">{{ l.31 }}</label>
+                            <input type="text" class="form-control" id="nd_ip" name="nd_ip" aria-describedby="nd_ip">
+                            <br>
+                            <label style="color: {{ t.text }};" for="nd_id" class="form-label">{{ l.32 }}</label>
+                            <input type="text" class="form-control" id="nd_id" name="nd_id" aria-describedby="nd_id">
+                            <br>
+                            <label style="color: {{ t.text }};" for="nd_room" class="form-label">{{ l.14 }}</label>
+                            <input type="text" class="form-control" id="nd_room" name="nd_room" aria-describedby="nd_room">
+                            <br>
+                            <label style="color: {{ t.text }};" for="nd_type" class="form-label">{{ l.34 }}</label>
+                            <input type="text" class="form-control" id="nd_type" name="nd_type" aria-describedby="nd_type">
+                            <br>
+                            <button type="submit" class="btn btn-primary">{{ l.15 }}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

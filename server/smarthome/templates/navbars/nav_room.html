@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-lg" style="color: {{ t.text }}; background-color: {{ t.bg_layer_1 }}" onload="startTime()">
+    <div class="container">
+        <a style="color: {{ t.text }};" class="navbar-brand" href="/smarthome">{{ l.10 }}</a>
+        <div class="collapse navbar-collapse" id="navbarsExample07">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a href="/" id="nav_allrooms" style="color: {{ t.text }};" class="nav-link">{{ l.30 }}</a>
+                </li>
+                {% for room in rooms %}
+                <li class="nav-item">
+                    <a style="color: {{ t.text }};" class="nav-link" href="/smarthome/room/{{ room }}">{{ room }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% if username != None %}
+            <div class="dropdown" style="margin-right: 10px;">
+                  <a class="dropdown-toggle" style="color: {{ t.text }}; text-decoration: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fas fa-user"></i>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="background-color: {{ t.bg_layer_2 }}; border-radius: 15px;">
+                      <li><a style="color: {{ t.text }};" class="dropdown-item" href="/smarthome/profile/{{ username }}">{{ username }}&nbsp;<i class="fas fa-user"></i></a></li>
+                      <hr style="margin: 0px;">
+                      <li><a style="color: {{ t.text }};" class="dropdown-item" href="/smarthome/admin">{{ l.7 }}</a></li>
+                      <li><a style="color: {{ t.text }};" class="dropdown-item" href="/smarthome/admin/users/usersettings">{{ l.20 }}</a></li>
+                      <li><a style="color: {{ t.text }};" class="dropdown-item" href="/smarthome/logout">{{ l.4 }}</a></li>
+                  </ul>
+            </div>
+            {% endif %}
+            {% if username == None %}
+            <div class="dropdown" style="margin-right: 10px;">
+                  <a class="dropdown-toggle" style="color: {{ t.text }}; text-decoration: none;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="fas fa-user"></i>
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="background-color: {{ t.bg_layer_2 }}; border-radius: 15px;">
+                      <li><a style="color: {{ t.text }};" class="dropdown-item" href="/smarthome/login">{{ l.3 }}</a></li>
+                  </ul>
+            </div>
+            {% endif %}
+            <div style="color: {{ t.text }};" id="Uhrzeit" onload="showTime()"></div>
+        </div>
+    </div>
+</nav>
+<script>
+function showTime(){
+    var date = new Date();
+    var h = date.getHours(); // 0 - 23
+    var m = date.getMinutes(); // 0 - 59
+    var s = date.getSeconds(); // 0 - 59
+    var session = "AM";
+
+
+
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+
+    var time = h + ":" + m + ":" + s + " ";
+    document.getElementById("Uhrzeit").innerText = time;
+    document.getElementById("Uhrzeit").textContent = time;
+
+    setTimeout(showTime, 1000);
+
+}
+
+showTime();
+</script>

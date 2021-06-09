@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}{{ l.2 }}{% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}background-color: {{ t.bg_body }};{% endblock %}
+{% block content %}
+{% include "navbars/nav_admin.html" %}
+<br>
+<div class="container">
+    <h1 style="color: {{ t.text }};">{{ l.38 }}</h1>
+    <span style="color: {{ t.text }};"><a style="color: {{ t.text }};" href="/smarthome/admin">{{ l.7 }}</a>&nbsp;/&nbsp;{{ l.38 }}</span>
+    <div class="row" style="padding-top: 2vh;">
+        <div class="col raum">
+            <div class="container">
+                <div class="row">
+                    <h2>{{ l.38 }}</h2>
+                    <br>
+                    <div class="col">
+                        <form method="post" action="/smarthome/admin/users/favorites/submit">
+                            <span>{{ l.39 }} 1</span>
+                            <select class="form-select" name="d1">
+                                {% for device in data %}
+                                <option value="d1_{{ device[0] }}">{{ device[2] }} - {{ device[1] }}</option>
+                                {% endfor %}
+                            </select>
+                            <br>
+                            <span>{{ l.39 }} 2</span>
+                            <select class="form-select" name="d2">
+                                {% for device in data %}
+                                <option value="d2_{{ device[0] }}">{{ device[2] }} - {{ device[1] }}</option>
+                                {% endfor %}
+                            </select>
+                            <br>
+                            <span>{{ l.39 }} 3</span>
+                            <select class="form-select" name="d3">
+                                {% for device in data %}
+                                <option value="d3_{{ device[0] }}">{{ device[2] }} - {{ device[1] }}</option>
+                                {% endfor %}
+                            </select>
+                            <br>
+                            <span>{{ l.39 }} 4</span>
+                            <select class="form-select" name="d4">
+                                {% for device in data %}
+                                <option value="d4_{{ device[0] }}">{{ device[2] }} - {{ device[1] }}</option>
+                                {% endfor %}
+                            </select>
+                            <br>
+                            <button type="submit" class="btn btn-primary">{{ l.24 }}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

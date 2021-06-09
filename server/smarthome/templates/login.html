@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ l.1 }}{% endblock %}
+{% block body %}background-color: {{ t.bg_body }}; height: 100%; display: flex;{% endblock %}
+{% block content %}
+<div class="container" style="height: 100vh;">
+    <div class="row" style="height: 20vh;">
+
+    </div>
+    <div class="row  justify-content-center">
+        <div class="col-8 col-md-3 text-center">
+            <h2 style="color: {{ t.text }};">{{ l.3 }}</h2>
+            <h3 style="color: {{ t.text }};">{{ l.7 }}</h3>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-8 col-md-3">
+            <form action="/smarthome/login" method="post">
+                <div class="mb-3">
+                    <label  style="color: {{ t.text }};" for="username" class="form-label">{{ l.8 }}</label>
+                    <input type="text" class="form-control" id="username" name="username">
+                </div>
+                <div class="mb-3">
+                    <label  style="color: {{ t.text }};" for="password" class="form-label">{{ l.9 }}</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <button type="submit" class="btn btn-primary">{{ l.3 }}</button>
+            </form>
+        </div>
+    </div>
+    <div class="row fixed-bottom justify-content-center">
+        <div class="col-8 col-md-3 text-center">
+            <p style="color: {{ t.text }};">&copy;&nbsp;{{ l.25 }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

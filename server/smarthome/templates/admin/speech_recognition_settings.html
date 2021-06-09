@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ l.2 }}{% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}background-color: {{ t.bg_body }};{% endblock %}
+{% block content %}
+{% include "navbars/nav_admin.html" %}
+<br>
+<div class="container">
+    <h1 style="color: {{ t.text }};">{{ l.35 }}</h1>
+    <span style="color: {{ t.text }};"><a style="color: {{ t.text }};" href="/smarthome/admin">{{ l.7 }}</a>&nbsp;/&nbsp;{{ l.35 }}</span>
+    <div class="row" style="padding-top: 2vh;">
+        <div class="col raum">
+            <div class="container">
+                <div class="row">
+                    <h2>{{ l.35 }}</h2>
+                    <br>
+                    <div class="col">
+                        <form action="/smarthome/admin/speechrecognition/changesettings" method="post">
+                            <label for="api_key_owm" class="form-label">OpenWeatherMap API Key</label>
+                            <input type="text" class="form-control" name="api_key_owm" id="api_key_owm" aria-describedby="api_key_owm_help"
+                            value="{{ owm_key }}">
+                            <div id="api_key_owm_help" class="form-text">{{ l.36 }}</div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">{{ l.24 }}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

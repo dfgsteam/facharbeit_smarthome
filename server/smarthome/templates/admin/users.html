@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}{{ l.2 }}{% endblock %}
+{% block head %}
+{% endblock %}
+{% block body %}background-color: {{ t.bg_body }};{% endblock %}
+{% block content %}
+{% include "navbars/nav_admin.html" %}
+<br>
+<div class="container">
+    <h1 style="color: {{ t.text }};">{{ l.12 }}</h1>
+    <span style="color: {{ t.text }};"><a style="color: {{ t.text }};" href="/smarthome/admin">{{ l.7 }}</a>&nbsp;/&nbsp;{{ l.12 }}</span>
+    <div class="row" style="padding-top: 2vh;">
+        <div class="col raum">
+            <div class="container">
+                <div class="row">
+                    <h2>{{ l.12 }}</h2>
+                    <br>
+                    <div class="col-7">
+                        <ul class="list-group" style="padding-top: 2vh; padding-bottom: 2vh; border-radius: 15px;">
+                        <li class="list-group-item" style="background-color: {{ t.bg_layer_2 }}; color: {{ t.text }}; font-size: 1.4em; font-weight: 700;">
+                            {{ l.12 }}
+                        </li>
+                        {% for user in users %}
+                            <li style="background-color: {{ t.bg_layer_2 }}; color: {{ t.text }}; font-size: 1.2em" class="list-group-item">
+                                <div class="row">
+                                    <div class="col-8">
+                                        {{ user[0] }}
+                                    </div>
+                                    <div class="col-4 text-end">
+                                        <a href="/smarthome/admin/users/delete/{{ user[0] }}" style="color: {{ t.text }};">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                        <li class="list-group-item" style="background-color: {{ t.bg_layer_2 }};">
+                                &nbsp;
+                        </li>
+                    </ul>
+                    </div>
+                    <div class="col-5">
+                        <br>
+                        <h2>{{ l.16 }}</h2>
+                        <form action="/smarthome/admin/users/add" method="post">
+                            <label style="color: {{ t.text }};" for="newuser" class="form-label">{{ l.8 }}</label>
+                            <input type="text" class="form-control" id="newuser" name="newuser" aria-describedby="newuser">
+                            <br>
+                            <label style="color: {{ t.text }};" for="pass" class="form-label">{{ l.9 }}</label>
+                            <input type="text" class="form-control" id="pass" name="pass" aria-describedby="pass">
+                            <br>
+                            <button type="submit" class="btn btn-primary">{{ l.15 }}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

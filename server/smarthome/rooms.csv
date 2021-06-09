@@ -1,0 +1,6 @@
+UID;Name;Category;Icon
+r_001;Schlafzimmer;Bedroom;fas fa-bed-alt
+r_002;Wohnzimmer;Living Room;fas fa-couch
+r_003;Badezimmer;Bathroom;fas fa-sink
+r_004;Küche;Kitchen;fas fa-oven
+r_005;Büro;Office;fas fa-phone-office

@@ -1,0 +1,5 @@
+Schlafzimmer
+Wohnzimmer
+Badezimmer
+Arbeitszimmer
+Küche

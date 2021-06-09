@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}{% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0">
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %} - {{ l.10 }}</title>
+    <!-- Bootstrap & jQuery & FontAwesome -->
+    <link rel="stylesheet" href="{{ url_for('sh.static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('sh.static', filename='css/all.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- JavaScript & Font & Favicon & Manifest -->
+    <script src="{{ url_for('sh.static', filename='js/main.js') }}"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="icon" type="image/png" href="{{ url_for('sh.static', filename='img/icon_purple128.png') }}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="manifest" href="{{ url_for('sh.static', filename='manifest.json') }}">
+    <!-- iOS -->
+    <link rel="apple-touch-icon"                       href="{{ url_for('sh.static', filename='img/appicon512.png') }}">
+    <meta name="apple-mobile-web-app-capable"          content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection"                      content="telephone=no">
+    <style>
+      .body {
+        font-family: 'Heebo', sans-serif !important;
+      }
+      .kachel {
+        background-color: {{ t.bg_layer_2 }};
+        color: {{ t.text }};
+        border-radius: 15px;
+        margin-right: 10px;
+        padding: 1.5em;
+      }
+      .raum {
+        background-color: {{ t.bg_layer_1 }};
+        color: {{ t.text }};
+        border-radius: 15px;
+        margin-right: 10px;
+        margin-left: 10px;
+        padding: 1em;
+      }
+      .zoom {
+        transition: transform .2s;
+      }
+      .zoom:hover {
+        transform: scale(1.0);
+      }
+    </style>
+</head>
+<body style="{% block body %}{% endblock %};">
+{% block content %}{% endblock %}
+
+
+<script type="text/javascript" src="{{ url_for('sh.static', filename='js/bootstrap.bundle.js') }}"></script>
+</body>
+</html>
